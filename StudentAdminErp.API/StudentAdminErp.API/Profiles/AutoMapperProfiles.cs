@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using StudentAdminErp.API.DomainModels;
-using DataModel = StudentAdminErp.API.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DataModels = StudentAdminErp.API.DataModels;
+using StudentAdminErp.API.Profiles.AfterMaps;
 
 namespace StudentAdminErp.API.Profiles
 {
@@ -12,14 +9,20 @@ namespace StudentAdminErp.API.Profiles
     {
         public AutoMapperProfiles()
         {
-            CreateMap<DataModel.Student, Student>()
+            CreateMap<DataModels.Student, Student>()
                 .ReverseMap();
 
-            CreateMap<DataModel.Gender, Gender>()
+            CreateMap<DataModels.Gender, Gender>()
                 .ReverseMap();
 
-            CreateMap<DataModel.Address, Address>()
+            CreateMap<DataModels.Address, Address>()
                 .ReverseMap();
+
+            CreateMap<UpdateStudentRequest, DataModels.Student>()
+                .AfterMap<UpdateStudentRequestAfterMap>();
+
+            CreateMap<AddStudentRequest, DataModels.Student>()
+                .AfterMap<AddStudentRequestAfterMap>();
         }
     }
 }
